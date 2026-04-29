@@ -6,15 +6,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/traffic")
 public class TrafficController {
 
+    @GetMapping("/")
+    public String home() {
+        return "Smart Traffic System API is running!";
+    }
+
     @PostMapping("/check")
     public String check(@RequestBody VehicleEvent event) {
 
         if (event.getSpeed() > 80 && !event.isEmergencyVehicle()) {
+
             int fine;
 
-            if (event.getSpeed() > 120) fine = 5000;
-            else if (event.getSpeed() > 100) fine = 2000;
-            else fine = 1000;
+            if (event.getSpeed() > 120)
+                fine = 5000;
+            else if (event.getSpeed() > 100)
+                fine = 2000;
+            else
+                fine = 1000;
 
             return "Violation! Fine: ₹" + fine;
         }
